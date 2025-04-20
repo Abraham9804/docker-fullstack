@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./back_node
+    ports:
+      - "3000:3000"
+    networks:
+      - app-net
+    depends_on:
+      - db
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./front_vue
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - backend
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    ports: 
+      - "3306:3306"
+    networks: 
+      - app-net
+
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports: 
+      - "82:80"
+    depends_on:
+      - backend 
+      - frontend
+    networks:
+      - app-net
