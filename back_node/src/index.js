@@ -7,7 +7,6 @@ const PORT = 3000
 app.use(cors())
 app.use("/api", router)
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor iniciado en: http://0.0.0.0:${PORT}`);
-  });
-  
+app.listen(PORT, ()=>{
+    console.log("servidor iniciado en: http://localhost:3000")
+})
